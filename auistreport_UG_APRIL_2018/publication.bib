@@ -1,0 +1,174 @@
+@article{10.1145/3360614,
+	author = {Song, Dowon and Lee, Myungho and Oh, Hakjoo},
+	title = {Automatic and Scalable Detection of Logical Errors in Functional Programming Assignments},
+	year = {2019},
+	issue_date = {October 2019},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {3},
+	number = {OOPSLA},
+	url = {https://doi.org/10.1145/3360614},
+	doi = {10.1145/3360614},
+	abstract = {We present a new technique for automatically detecting logical errors in functional programming assignments. Compared to syntax or type errors, detecting logical errors remains largely a manual process that requires hand-made test cases. However, designing proper test cases is nontrivial and involves a lot of human effort. Furthermore, manual test cases are unlikely to catch diverse errors because instructors cannot predict all corner cases of diverse student submissions. We aim to reduce this burden by automatically generating test cases for functional programs. Given a reference program and a student's submission, our technique generates a counter-example that captures the semantic difference of the two programs without any manual effort. The key novelty behind our approach is the counter-example generation algorithm that combines enumerative search and symbolic verification techniques in a synergistic way. The experimental results show that our technique is able to detect 88 more errors not found by mature test cases that have been improved over the past few years, and performs better than the existing property-based testing techniques. We also demonstrate the usefulness of our technique in the context of automated program repair, where it effectively helps to eliminate test-suite-overfitted patches.},
+	journal = {Proc. ACM Program. Lang.},
+	month = {oct},
+	articleno = {188},
+	numpages = {30},
+	keywords = {Automated Test Case Generation, Symbolic Execution, Program Synthesis}
+}
+
+@misc{bitesize_2022, 
+	title={Logic errors - writing error-free code - KS3 computer science revision}, 
+	url={https://www.bbc.co.uk/bitesize/guides/zcjfyrd/revision/2}, 
+	journal={BBC News}, 
+	publisher={BBC}, 
+	author={bitesize, BBC}, 
+	year={2022}, 
+	month={Nov}
+} 
+
+@misc{bitesize_2022_4, 
+	title={Logic errors - writing error-free code - KS3 computer science revision}, 
+	url={https://www.bbc.co.uk/bitesize/guides/zcjfyrd/revision/4}, 
+	journal={BBC News}, 
+	publisher={BBC}, 
+	author={bitesize, BBC}, 
+	year={2022}, 
+	month={Nov}
+} 
+
+@article{10.1145/3276528,
+	author = {Lee, Junho and Song, Dowon and So, Sunbeom and Oh, Hakjoo},
+	title = {Automatic Diagnosis and Correction of Logical Errors for Functional Programming Assignments},
+	year = {2018},
+	issue_date = {November 2018},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {2},
+	number = {OOPSLA},
+	url = {https://doi.org/10.1145/3276528},
+	doi = {10.1145/3276528},
+	abstract = {We present FixML, a system for automatically generating feedback on logical errors in functional programming assignments. As functional languages have been gaining popularity, the number of students enrolling functional programming courses has increased significantly. However, the quality of feedback, in particular for logical errors, is hardly satisfying. To provide personalized feedback on logical errors, we present a new error-correction algorithm for functional languages, which combines statistical error-localization and type-directed program synthesis enhanced with components reduction and search space pruning using symbolic execution. We implemented our algorithm in a tool, called FixML, and evaluated it with 497 students’ submissions from 13 exercises, including not only introductory but also more advanced problems. Our experimental results show that our tool effectively corrects various and complex errors: it fixed 43% of the 497 submissions in 5.4 seconds on average and managed to fix a hard-to-find error in a large submission, consisting of 154 lines. We also performed user study with 18 undergraduate students and confirmed that our system actually helps students to better understand their programming errors.},
+	journal = {Proc. ACM Program. Lang.},
+	month = {oct},
+	articleno = {158},
+	numpages = {30},
+	keywords = {Automated Program Repair, Program Synthesis}
+}
+
+@InProceedings{pmlr-v139-yasunaga21a,
+	title = 	 {Break-It-Fix-It: Unsupervised Learning for Program Repair},
+	author =       {Yasunaga, Michihiro and Liang, Percy},
+	booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+	pages = 	 {11941--11952},
+	year = 	 {2021},
+	editor = 	 {Meila, Marina and Zhang, Tong},
+	volume = 	 {139},
+	series = 	 {Proceedings of Machine Learning Research},
+	month = 	 {18--24 Jul},
+	publisher =    {PMLR},
+	pdf = 	 {http://proceedings.mlr.press/v139/yasunaga21a/yasunaga21a.pdf},
+	url = 	 {https://proceedings.mlr.press/v139/yasunaga21a.html},
+	abstract = 	 {We consider repair tasks: given a critic (e.g., compiler) that assesses the quality of an input, the goal is to train a fixer that converts a bad example (e.g., code with syntax errors) into a good one (e.g., code with no errors). Existing works create training data consisting of (bad, good) pairs by corrupting good examples using heuristics (e.g., dropping tokens). However, fixers trained on this synthetically-generated data do not extrapolate well to the real distribution of bad inputs. To bridge this gap, we propose a new training approach, Break-It-Fix-It (BIFI), which has two key ideas: (i) we use the critic to check a fixer’s output on real bad inputs and add good (fixed) outputs to the training data, and (ii) we train a breaker to generate realistic bad code from good code. Based on these ideas, we iteratively update the breaker and the fixer while using them in conjunction to generate more paired data. We evaluate BIFI on two code repair datasets: GitHub-Python, a new dataset we introduce where the goal is to repair Python code with AST parse errors; and DeepFix, where the goal is to repair C code with compiler errors. BIFI outperforms existing methods, obtaining 90.5% repair accuracy on GitHub-Python (+28.5%) and 71.7% on DeepFix (+5.6%). Notably, BIFI does not require any labeled data; we hope it will be a strong starting point for unsupervised learning of various repair tasks.}
+}
+
+
+@article{10.1145/2499370.2462195,
+	author = {Singh, Rishabh and Gulwani, Sumit and Solar-Lezama, Armando},
+	title = {Automated Feedback Generation for Introductory Programming Assignments},
+	year = {2013},
+	issue_date = {June 2013},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {48},
+	number = {6},
+	issn = {0362-1340},
+	url = {https://doi.org/10.1145/2499370.2462195},
+	doi = {10.1145/2499370.2462195},
+	abstract = {We present a new method for automatically providing feedback for introductory programming problems. In order to use this method, we need a reference implementation of the assignment, and an error model consisting of potential corrections to errors that students might make. Using this information, the system automatically derives minimal corrections to student's incorrect solutions, providing them with a measure of exactly how incorrect a given solution was, as well as feedback about what they did wrong.We introduce a simple language for describing error models in terms of correction rules, and formally define a rule-directed translation strategy that reduces the problem of finding minimal corrections in an incorrect program to the problem of synthesizing a correct program from a sketch. We have evaluated our system on thousands of real student attempts obtained from the Introduction to Programming course at MIT (6.00) and MITx (6.00x). Our results show that relatively simple error models can correct on average 64% of all incorrect submissions in our benchmark set.},
+	journal = {SIGPLAN Not.},
+	month = {jun},
+	pages = {15–26},
+	numpages = {12},
+	keywords = {computer-aided education, program synthesis, automated grading}
+}
+@article{10.1145/3428205,
+	author = {Wang, Yu and Wang, Ke and Gao, Fengjuan and Wang, Linzhang},
+	title = {Learning Semantic Program Embeddings with Graph Interval Neural Network},
+	year = {2020},
+	issue_date = {November 2020},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {4},
+	number = {OOPSLA},
+	url = {https://doi.org/10.1145/3428205},
+	doi = {10.1145/3428205},
+	abstract = {Learning distributed representations of source code has been a challenging task for machine learning models. Earlier works treated programs as text so that natural language methods can be readily applied. Unfortunately, such approaches do not capitalize on the rich structural information possessed by source code. Of late, Graph Neural Network (GNN) was proposed to learn embeddings of programs from their graph representations. Due to the homogeneous (i.e. do not take advantage of the program-specific graph characteristics) and expensive (i.e. require heavy information exchange among nodes in the graph) message-passing procedure, GNN can suffer from precision issues, especially when dealing with programs rendered into large graphs. In this paper, we present a new graph neural architecture, called Graph Interval Neural Network (GINN), to tackle the weaknesses of the existing GNN. Unlike the standard GNN, GINN generalizes from a curated graph representation obtained through an abstraction method designed to aid models to learn. In particular, GINN focuses exclusively on intervals (generally manifested in looping construct) for mining the feature representation of a program, furthermore, GINN operates on a hierarchy of intervals for scaling the learning to large graphs. We evaluate GINN for two popular downstream applications: variable misuse prediction and method name prediction. Results show in both cases GINN outperforms the state-of-the-art models by a comfortable margin. We have also created a neural bug detector based on GINN to catch null pointer deference bugs in Java code. While learning from the same 9,000 methods extracted from 64 projects, GINN-based bug detector significantly outperforms GNN-based bug detector on 13 unseen test projects. Next, we deploy our trained GINN-based bug detector and Facebook Infer, arguably the state-of-the-art static analysis tool, to scan the codebase of 20 highly starred projects on GitHub. Through our manual inspection, we confirm 38 bugs out of 102 warnings raised by GINN-based bug detector compared to 34 bugs out of 129 warnings for Facebook Infer. We have reported 38 bugs GINN caught to developers, among which 11 have been fixed and 12 have been confirmed (fix pending). GINN has shown to be a general, powerful deep neural network for learning precise, semantic program embeddings.},
+	journal = {Proc. ACM Program. Lang.},
+	month = {nov},
+	articleno = {137},
+	numpages = {27},
+	keywords = {Graph neural networks, Program embeddings, Control-flow graphs, Intervals, Null pointer dereference detection}
+}
+
+@InProceedings{10.1007/978-3-642-04754-1_2,
+	author="Longo, Pietro
+		and Sterbini, Andrea
+		and Temperini, Marco",
+	editor="Lytras, Miltiadis D.
+		and Damiani, Ernesto
+		and Carroll, John M.
+		and Tennyson, Robert D.
+		and Avison, David
+		and Naeve, Ambj{\"o}rn
+		and Dale, Adrian
+		and Lefrere, Paul
+		and Tan, Felix
+		and Sipior, Janice
+		and Vossen, Gottfried",
+	title="TSW: A Web-Based Automatic Correction System for C Programming Exercises",
+	booktitle="Visioning and Engineering the Knowledge Society. A Web Science Perspective",
+	year="2009",
+	publisher="Springer Berlin Heidelberg",
+	address="Berlin, Heidelberg",
+	pages="13--21",
+	abstract="We present the TSW system (TestSystem Web), a web-based environment currently developed at the Rome 1 University, for the delivery of C programming exercises and their automatic correction.",
+	isbn="978-3-642-04754-1"
+}
+
+@INPROCEEDINGS{9648437,
+	author={Putra, Irfan Sofyana and Rukmono, Satrio Adi and Perdana, Riza Satria},
+	booktitle={2021 International Conference on Data and Software Engineering (ICoDSE)}, 
+	title={Abstract Syntax Tree (AST) and Control Flow Graph (CFG) Construction of Notasi Algoritmik}, 
+	year={2021},
+	volume={},
+	number={},
+	pages={1-6},
+	doi={10.1109/ICoDSE53690.2021.9648437}
+}
+
+@INPROCEEDINGS{8517171,
+	author={Yoshizawa, Yuto and Watanobe, Yutaka},
+	booktitle={2018 9th International Conference on Awareness Science and Technology (iCAST)},
+	title={Logic Error Detection Algorithm for Novice Programmers based on Structure Pattern and Error Degree},
+	year={2018},
+	volume={},
+	number={},
+	pages={297-301},
+	doi={10.1109/ICAwST.2018.8517171}
+}
+
+@INPROCEEDINGS{8672669,
+	author={Al-Ashwal, Deena and Zaid Al-Sewari, Eman and Abdulghani Al-Shargabi, Asma},
+	booktitle={2018 International Arab Conference on Information Technology (ACIT)},
+	title={A CASE Tool for JAVA Programs Logical Errors Detection: Static and Dynamic Testing},
+	year={2018},
+	volume={},
+	number={},
+	pages={1-6},
+	abstract={During testing of programs, developers face two types of errors: syntax errors, and logical errors. Generally, logical errors in programming are more difficult to detect. To figure out the reason of that errors, it should trace the source code manually to find the potential instructions that may cause the problem. Consequently the testing will spend a lot of time, effort, and cost. The cost will be problematic with large-scale systems, and the cost will doubled in evolution, confirmation testing, and regression testing. This paper introduces a prototype of a CASE tool for Java logical errors detecting using static and dynamic testing techniques. This research utilizes the Junit and PMD tools to detect the logical errors and analyze the potential causes of these errors based on Java common logical errors lists. The prototype is tested according to some Java programs under different conditions.},
+	keywords={},
+	doi={10.1109/ACIT.2018.8672669},
+	ISSN={},
+	month={Nov},
+}

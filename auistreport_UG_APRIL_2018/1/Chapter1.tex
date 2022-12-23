@@ -1,0 +1,64 @@
+% Chapter 1
+
+\chapter{\uppercase{Introduction}} % Main chapter title
+\label{intro} % For referencing
+\justifying
+\section{\uppercase{PROJECT OVERVIEW}}
+Programming is an exercise or practice that boost our logical thinking and improves a problem-solving skill. It teaches us how to accomplish a task with the help of a computer program or software. Therefore programming is a task to implement a solution to a problem in the form of computer language.
+
+              Errors are the problems or the faults that occur in the program, which makes the behaviour of the program abnormal, and experienced developers can also make these faults. Programming errors are also known as the bugs or faults, and the process of removing these bugs is known as debugging.These errors are detected either during the time of compilation or execution. Thus, the errors must be removed from the program for the successful execution of the program.In the following section the different types of errors are described.
+
+ 
+  \section{\uppercase{TYPES OF ERRORS}}
+
+                 There are different kinds of errors encountered in a program some of those errors are:
+                 \begin{itemize}
+  \item Syntax Errors
+  \item Semantic Errors
+  \item Logical Errors
+\end{itemize}
+                 
+\subsection{SYNTAX ERRORS}
+Syntax errors are also known as the compilation errors as they occur at the compilation time.\cite{bitesize_2022} These errors mainly occur due to the mistakes while typing or not following the syntax of the specified programming language. Syntax errors are mostly spelling and punctuation errors and incorrect labels.These errors exist in the program, and will cause the program to crash or not run at all.Syntax errors are caught by a software program called a compiler, and the programmer must fix them before the program is compiled and then run.
+\subsection{SEMANTIC ERRORS}
+
+Semantic errors are the errors that occurred when the statements are not understandable by the compiler.The semantic error can arises using the wrong variable or using wrong operator or doing operation in wrong order.Some of the commonly seen semantic errors are incompatible types of operands,undeclared variable,not matching of actual argument with formal argument.They are encountered at run time \cite{bitesize_2022} but would lead to exceptions that can be debugged.
+ 
+\subsection{LOGICAL ERRORS}
+\justifying
+The logical error is an error that leads to an undesired output. These errors produce the incorrect output\cite{bitesize_2022}, but they are error-free.The occurrence of logical errors mainly depends upon the logical thinking of the developer.Logic errors are not always easy to recognize immediately because syntax errors, are valid when considered in the language, but do not produce the intended behavior.
+
+\section{\uppercase{TYPES OF LOGICAL ERRORS}}
+
+A program can have different types of logical errors like wrong Boolean expression\cite{bitesize_2022},usage of wrong data types\cite{bitesize_2022},having a wrong sequence, missing statement , having an infinite loop.
+
+\section{\uppercase{BACKGROUND}}
+Providing non-personalised feedback on logical errors to the students was not helpful in rectifying these logical errors.The standard way of giving feedback on logical errors is failed test cases which may not help the students to fix these errors. Providing the answer code is also troublesome as there are many ways to implement the program. 
+
+\section{\uppercase{OBJECTIVES}} 
+
+The goal of our project is to develop an automated system to find logical errors in C programming assignments.The objectives of this project are :
+\begin{itemize}
+\item Generate test cases from the correct reference program
+\item Conversion of C code to bit code.
+\item Generating a control flow graph from the intermediate representation.
+\item Generating the feedback for the incorrect code.\end{itemize}
+\section{\uppercase{PROBLEM STATEMENT}}
+In programs among syntax and semantic errors, logical errors highly occur and identifying these logical errors and rectifying them is a tedious process.The solutions proposed before are usually through test cases or manually identifying logical errors through a mentor.The aim is to create a program that identifies and suggests corrections on logical errors found in a program based on a reference implementation and test cases.
+
+\section{\uppercase{SOLUTION OVERVIEW}}
+We will be considering the difference in CFG between the correct implementation and implementations with errors as well as test cases to identify bugs in the source and provide appropriate feedback.
+
+\section{\uppercase{ORGANIZATION OF THE REPORT}}
+The project report is organized as follows:
+
+\textbf{Chapter 2} discusses the existing systems and various methods required for the proposed system.
+
+\textbf{Chapter 3} discusses the working of various modules of the proposed system along with the overall system architecture
+
+\textbf{Chapter 4} discussed the implementation detail of the proposed system and illustrates the experimental results of the proposed system
+
+\textbf{Chapter 5} concludes the report and proposes possible enhancements  that can be done in future 
+
+
+

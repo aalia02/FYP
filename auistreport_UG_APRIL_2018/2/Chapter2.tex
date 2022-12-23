@@ -1,0 +1,80 @@
+% Chapter 2
+
+\chapter{\uppercase{Literature Survey}} % Main chapter title
+\label{ch:survey} % For referencing
+
+This chapter gives a detailed view on the existing methods related
+to this project, technologies involved in each method and also gives a brief
+description on the advantages and disadvantages involved in each of the existing
+works.
+\section{\uppercase{AUTOMATIC DETECTION OF LOGICAL ERRORS}}
+This section gives the overview of various papers mainly focusing on detection of logical errors and the main goal is to design a system that can easily detect these errors.
+\justifying
+\subsection{ LOGICAL ERRORS IN FUNCTIONAL PROGRAMS}
+
+
+ Dowon Song et al.,\cite{10.1145/3360614} proposes a system that detects logical errors through test case generation in functional programming assignments based on enumerative search and symbolic verification techniques.
+ This paper proposes an approach which essentially does type-directed enumerative search over the space of test cases in order to produce a test case that illustrates the behavioural difference between two programs. The inputs are counted of varying sizes and determine whether or not each prospective counter-example can cause the behavioural difference. However, the enumeration-only approach is inappropriate for inferring primitive
+values such as integers and strings because there are infinitely many values to consider at a single
+step of enumeration. This can be overcome by leveraging a symbolic verification technique.
+That is, we do not directly generate integer and string constants during the enumerative search
+but represent them as symbols, which produces “symbolic test cases" instead of concrete ones.
+Checking whether a symbolic test case can trigger the behavioral difference of the two programs
+is done by first performing symbolic execution on the programs and then solving the resulting
+verification condition with the SMT solver.
+\justify{
+Junho Lee et al.,\cite{10.1145/3276528} proposes an algorithm  that combines statistical error localization and enhanced type-directed program synthesis. First, it identifies the error locations and scores them with statistical reasoning on the results from dynamic executions. Secondly, the algorithm uses search-based program synthesis to replace the erroneous expression by a correct one that satisfies all of the given testcases. The algorithm enhances type-directed enumerative search with two techniques: components reduction and search space pruning. Because enumerating all components is too large to search entirely, the components are reduced by deducing semantically redundant variables via data-flow analysis and using syntax components extracted from a correct implementation provided by instructor. To prune the search space more effectively,
+we combine type-directed enumeration with symbolic execution to detect the partial programs that
+are well-typed but functionally inconsistent.} 
+\subsection{ BREAK-IT-FIX-IT MODEL}
+Michihiro Yasunaga et al.,\cite{pmlr-v139-yasunaga21a} proposes a system of generating more realistic synthetic bad code from good code and training a correction model through
+ two key ideas: one the critic is used to check a fixer’s output on
+real bad inputs and add good (fixed) outputs to
+the training data, the other is the breaker is trained to
+generate realistic bad code from good code. Based
+on these ideas the breaker and fixer are iteratively updated  to use them in conjunction to
+generate more paired data.
+
+\subsection{FEEDBACK GENERATION }
+Rishabh Singh et al.,\cite{10.1145/2499370.2462195} proposes a solution strategy to find minimal corrections of a program based on two phases In the first phase, the Program Rewriter uses the correction rules to translate the solution into a language called Micro Python; Using this language gives us a clear notation to define groups of MPY candidate programs and a cost model to account for the number of corrections relevant to each software in this collection.. In the second phase, this MPY program is translated into a sketch program by the Sketch Translator.The Sketch synthesis system allows programmers to write programs while leaving fragments of it  as holes; the contents of these holes are filled up automatically by the synthesizer such that the program matches to the specification provided in the reference implementation. The synthesizer uses the CEGIS algorithm to efficiently compute the values for holes and uses bounded symbolic verification techniques for performing equivalence check of the both the implementations.The Feedback Generator leverages the choices the synthesizer made to produce the corresponding feedback in natural language after the synthesizer has found a solution.
+\subsection{GRAPH INTERVAL NEURAL NETWORK}
+Yu Wang et al.,\cite{10.1145/3428205} proposes a  graph model, called Graph
+Interval Neural Network(GINN), which uses control flow graph to represent an input program, and
+abstracts it with three primitive operators: partitioning, heightening, and lowering. Initially GINN uses the partitioning operator to split the graph into a set of intervals.The heightening operation replaces each active interval of multiple nodes on the lower order graph with a single node on the higher order graph.Lastly the lowering operator is applied to convert the third order graph back to the second order graph.The nodes that were created on the higher order graphs for replacing an interval on the lower order graph will be split back into the nodes of which the interval previously consisted of.Heightening operator enables GINN to capture the global properties of a graph, with which lowering operator helps GINN to compute
+precise node representations.
+\subsection{AUTOMATIC CORRECTION SYSTEM FOR C PROGRAMS}
+Pietro Longo et al.,\cite{10.1007/978-3-642-04754-1_2} proposes a system that automatically tests the student’s programs by applying unit-tests and/or by comparing the behaviour of the student’s code to a reference implementation.How much of the student's code was visited during the test is indicated by the code coverage tool. A function/loop execution counter for the evaluation of execution complexity, a tracker for stack depth utilisation to check for proper implementation of recursive functions, and a cyclomatic complexity evaluator to compare the number of various logic paths in the code.
+
+\subsection{STATIC AND DYNAMIC TESTING}
+This paper presented by Deena Al-Ashwal et al.,\cite{8672669} introduces a prototype of a CASE
+tool for Java logical errors detecting using static and dynamic
+testing techniques. This research utilizes the Junit and PMD tools
+to detect the logical errors and analyze the potential causes of
+these errors based on Java common logical errors lists.The idea of implementing the proposed prototype is
+combining between PMD Tool (static testing tool) and JUnit
+tool (dynamic testing tool). The mechanism is  the test cases are established and executed by JUnit tool and produce a report about testing result. If the result contains
+faults, the java code analyzed by customized PMD and show
+the java code statements which may be the causes of these faults.
+\section{\uppercase{ABSTRACT SYNTAX TREE GENERATION}}
+An Abstract Syntax Tree (AST) is the structural in-memory representation of a program’s source code. Clang’s AST mixes syntacticonly such as parenthesis and semantic-only such as implicit conversions nodes into the same tree structure
+This section gives and overview on the generation of Abstract Syntax Tree .
+\subsection{ NOTASI ALGORITMIK}
+Irfan Sofyana Putra et al.,\cite{9648437} proposes in his paper a method to generate abstract syntax tree and control flow graph of programs. Initially  the grammar of Notasi Algoritmik is defined . After the grammar is defined, lexical and syntax analysis is done to construct the Abstract Syntax Tree. AST itself will be used to represent the Notasi Algoritmik in abstract form to construct the Control Flow Graph. An algorithm created by  The research shows that AST is well constructed after two-phase lexical analysis and syntax
+analysis. Meanwhile, CFG can be constructed using the recursive technique that traverses nodes in the AST.
+\subsection{LOGIC ERROR BASED ON STRUCTURE PATTERN AND ERROR DEGREE}
+The paper presented by Yuto Yoshizawa et  al.,\cite{8517171} proposed a logic error detection algorithm based on structure pattern and error degree. Structure pattern is an index of similarity based on abstract syntax trees, and error
+degree is a measure of appropriateness for feedback.The proposed detection algorithm compares abstract syntax
+trees of the target source codes by applying a set of steps
+recursively.
+
+\section{\uppercase{LIMITATIONS OF EXISTING SYSTEMS}}
+\begin{itemize}
+\item The system does not  provide the exact correction to be done to fix the code.\cite{10.1145/3360614}
+\item The proposed system does not  explain given  test cases as to why their implementation is buggy.\cite{pmlr-v139-yasunaga21a}
+\item The paper focuses on the correction of compiler errors.\cite{10.1145/2499370.2462195}
+\item The feedback is generated only on programs that can be corrected with a set of local rewrite rules.\cite{10.1145/3428205}
+\item  In this paper the feedback was generated that was inappropriate for learning support.\cite{8672669}
+\item The system only asks questions built based on well known Java errors check lists so not all errors are identified.\cite{8672669}
+
+\end{itemize}
+

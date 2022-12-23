@@ -1,0 +1,141 @@
+% Chapter 4
+
+\chapter{\uppercase{Implementation }} % Main chapter title
+\label{chap4} % For referencing
+This chapter deals with the modules and submodules involved in implementing the Automated Diagnosis of Logical Errors in C programs.
+\section{\uppercase{Testcase Generation}}
+The testcase for a particular source code is generated using the KLEE tool.To test a function with KLEE, we need to run it on symbolic input. To mark a variable as symbolic, the klee\_make\_symbolic function (defined in klee/klee.h) is used,which takes three arguments: the address of the variable (memory location) that we want to treat as symbolic, its size, and a name for the variable.
+\begin{algorithm}
+\caption{Marking input as symbolic}\label{alg:cap}
+\textbf{Input:} Source Code\\
+\textbf{Output:} Total number of instructions, completed paths, partially completed paths and testcases
+\begin{algorithmic}[1]
+\State Get the variables that is passed in the main function $num$
+\State Call klee\_make\_symbolic($num$, sizeof($num$), "num")
+\State Return total number of instructions, completed paths, partially completed paths and testcases
+\end{algorithmic}
+\end{algorithm}
+KLEE operates on LLVM bitcode. To run a program with KLEE, the souce code is first compiled into to LLVM bitcode using clang -emit-llvm which is a bitcode file in LLVM bitcode format that is produced using the following command line statement. The -I parameter tells the compiler where to look for klee/klee.h, which defines the intrinsic functions like klee make symbolic that are needed to communicate with the KLEE virtual machine.The bitcode file's debug information is added with the -g option, The bitcode file that was given to KLEE shouldn't be optimised because KLEE has already chosen the appropriate optimisations, which can be activated using the —optimize command-line option.The klee tool is run with the bitcode file for generation of testcases.
+
+
+\section{\uppercase{Generation of Source Level Control Flow Graph}}
+This section discusses the steps involved in generating the control flow graph from the source code in a block format.
+
+The below code does the following steps the source code is taken and a name is assigned through the OptionCategory function.The command line arguments are passed through the OptionsParser.The Clang tool is initialized using the OptionsParser to getSourcePathList() - what files are going to be compiled and getCompilations()- what type of file the source code is to be compiled to.Using Tool.run a new ToolFactory is created.
+\begin{algorithm}
+\caption{Running the Clang Tool}\label{alg:cap}
+\begin{algorithmic}[1]
+\State Create CFGCategory as an llvm::cl::OptionCategory
+\State Create OptionsParser as a clang::tooling::CommonOptionsParser
+\State Create ClangToolTool with OptionsParser's Compilations and SourcePathList
+\State Run Tool with ToolFactory
+\end{algorithmic}
+\end{algorithm}
+
+\newline\newline
+FrontendAction is an interface that allows execution of user specific actions as part of the compilation. To run tools over the AST clang it provides a convenient interface called ASTFrontendAction, which takes care of executing the action. 
+\begin{algorithm}
+\caption{Creating a FrontendAction}\label{alg:cap}
+\begin{algorithmic}[1]
+\State \textbf{Define} class MyFrontendAction
+\State \textbf{Create} member unique pointer of type clang::ASTConsumer
+\State \textbf{Implement} function CreateASTConsumer(lang::CompilerInstance\&, llvm::StringRef) to \Return ASTConsumer
+\end{algorithmic}
+\end{algorithm}
+
+ASTConsumer is an interface used to write generic actions on an AST, regardless of how the AST was produced. ASTConsumer provides many different entry points, HandleTranslationUnit is used here, which is called with the ASTContext for the translation unit.
+
+\begin{algorithm}
+\caption{Creating an ASTConsumer}\label{alg:cap}
+\begin{algorithmic}[1]
+\State class MyConsumer
+\State \qquad MyCallback handler;  
+\State \qquad clang::ast\_matchers::MatchFinder match\_finder
+ \\ \qquad function handler()\\
+\qquad\qquad matching\_node = clang::ast\_matchers::functionDecl(clang:: \\ \qquad\qquad ast\_matchers::MainFile()).bind(name)
+\\ \qquad function HandleTranslationUnit(clang::ASTContext& ctx)\\
+			\qquad\qquad match\_finder.matchAST(ctx);
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Print the Graph in Blocks (in class method MyCallback.run)}\label{alg:cap}
+\begin{algorithmic}[1]
+\State Function $\leftarrow$ Result.Nodes.getNodeAs$<$clang::FunctionDecl$>$()
+\State CFG $\leftarrow$ clang::CFG::buildCFG(Function, Function-$>$getBody(), Result.Context, clang::CFG::BuildOptions())
+\For{blk in CFG}
+   \State blk-$>$dump()
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\section{\uppercase{Boost Graph Generation}}
+Boost Graph Library is a generic interface that allows access to a graph's structure, but hides the details of the implementation. This is an “open” interface that is any graph library that implements this interface will be interoperable with the BGL generic algorithms and with other algorithms that also use this interface.The BGL graph interface and graph components are generic, in the same sense as the Standard Template Library (STL). The algorithm \ref{alg:boost-AST} is used to generate a source level graph.
+\begin{algorithm}
+\caption{Boost Graph Generation from AST}\label{alg:boost-AST}
+\begin{algorithmic}[1]
+\State Initialize vertex $v$ to zero
+\State Create a vector container $E$ for edges
+\State Create a vector container $L$ for labels
+\State Create a map $M$
+\For{$b \in$ CFG}
+    \State $x \gets$ Function.getNameAsString() + $b$.getBlockID()
+    \If {$M$.find($x$) $==$ $M$.end()}
+        \State $M[x] \gets v$
+        \State increment $v$
+        \State $str \gets$ ""
+        \State llvm.raw\_string\_ostream output($str$)
+        \For{each block instance $i$}
+            \State $i$.dumpToStream(output)
+            \If {$b$.getTerminator().isValid()}
+                \State $b$.printTerminator(output)
+            \EndIf
+            \State $L$.push\_back($str$)
+        \EndFor
+        \For{each successive block instance $i$}
+            \State $y \gets$ Function.getNameAsString() + $b$.getBlockID()
+            \If {$M$.find($y$) $==$ $M$.end()}
+                \State $M[y] \gets v$
+                \State increment $v$
+                \State $str \gets$ initialize a string
+                \State llvm.raw\_string\_ostream output($str$)
+                \For{each block instance $i$}
+                    \State $i$.dumpToStream(output)
+                    \State $L$.push\_back($str$)
+                \EndFor
+            \EndIf
+            \State $E$.push\_back(($M[x]$, $M[y]$))
+        \EndFor
+    \EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\section{\uppercase{Error Branch Detection}}
+This section focuses on identifying the branches in the program that causes an error - that is wrong branch was taken or a branch was missing altogether for some test case.The test cases are identified that caused the error as well as the corresponding branches that were taken in the reference program as compared to the user program and identify the branch error. 
+
+The Abstract Syntax Tree (AST) generated using Clang can be used to automatically insert statements after control flow statements. This can be achieved by traversing the AST and inserting the desired statement after each control flow statement. 
+
+For instance if a statement is to be inserted after a while loop, the AST can be traversed to find the while loop and then the statement can be inserted as a sibling node of the while loop in the AST. This process can be repeated for other control flow statements, such as if-statements, for-loops and switch-statements.
+
+By using the AST generated using Clang, it is possible to automatically insert statements after control flow statements in a program. This can be a useful tool for labeling all the branches of the program.
+
+The algorithm below explains the steps involved in this process.
+\begin{algorithm}
+\caption{Error Branch Detection}\label{alg:error-detection}
+\begin{algorithmic}[1]
+\For{each source file}
+    \State Create copy of Abstract Syntax Tree (AST)
+    \For{each statement in AST}
+        \If{statement type in \{'if-else', 'while', 'for'\}}
+            \State Append branch number to body
+        \EndIf
+    \EndFor
+    \State Generate c file with appended branch numbers
+    \State Use KLEE to generate testcases and assert return value of user and reference program
+    \State Use KLEE to find testcase that fails assertion
+    \State Identify corresponding branches in user program that caused the error
+\EndFor
+\end{algorithmic}
+\end{algorithm}
